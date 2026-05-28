@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <linearGradient id="g" x1="18" y1="16" x2="114" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff6f14"/>
+      <stop offset="1" stop-color="#568a64"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="10" width="108" height="108" rx="26" fill="url(#g)" opacity="0.18"/>
+  <!-- Simple Pasio Life mark (placeholder) -->
+  <path d="M38 78c10-28 22-42 34-42 16 0 22 18 18 34-4 14-15 26-34 26-10 0-20-6-18-18Z" fill="url(#g)" opacity="0.95"/>
+  <path d="M48 86c10 6 22 7 34 2" stroke="url(#g)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M42 62c10-10 21-16 33-17" stroke="url(#g)" stroke-width="6" stroke-linecap="round"/>
+  <text x="64" y="110" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="14" fill="#5b3f2e">
+    Pasio Life
+  </text>
+</svg>
+
