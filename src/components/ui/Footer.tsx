@@ -12,8 +12,9 @@ const quickLinks = [
   { href: "/experiences", label: "Experiences" },
   { href: "/booking", label: "Booking" },
   { href: "/meet-the-family", label: "Meet the Family" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/school-of-life", label: "School of Life" },
-  { href: "/buy-sell-horses", label: "Buy & Sell Horses" }
+  { href: "/buy-sell-horses", label: "Trotalot" }
 ];
 
 export default function Footer() {

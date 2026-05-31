@@ -2,6 +2,8 @@ import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import ContactForm from "@/components/forms/ContactForm";
 import { ButtonLink } from "@/components/ui/Button";
+import { PASIO_PHONE_DISPLAY, PASIO_PHONE_TEL } from "@/lib/contact";
+import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 type ContactSearchParams = Promise<{
   topic?: string | string[];
@@ -36,8 +38,31 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               <div className="mt-6 space-y-2 text-sm font-semibold text-ink-900/75">
                 <div>Location: Parys area, South Africa</div>
                 <div>Hours: by appointment</div>
+                <div>
+                  Phone:{" "}
+                  <a href={PASIO_PHONE_TEL} className="text-ember-700 hover:text-ember-800">
+                    {PASIO_PHONE_DISPLAY}
+                  </a>
+                </div>
+                <div>
+                  WhatsApp:{" "}
+                  <a
+                    href={buildWhatsAppUrl("Hi Pasio Life, I'd like to get in touch.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-ember-700 hover:text-ember-800"
+                  >
+                    Message us
+                  </a>
+                </div>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
+                <ButtonLink
+                  href={buildWhatsAppUrl("Hi Pasio Life, I'd like to get in touch.")}
+                  variant="primary"
+                >
+                  WhatsApp
+                </ButtonLink>
                 <ButtonLink href="https://instagram.com/" variant="secondary">
                   Instagram
                 </ButtonLink>

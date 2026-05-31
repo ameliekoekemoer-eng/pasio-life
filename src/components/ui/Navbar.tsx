@@ -11,6 +11,7 @@ const navItems = [
   { href: "/", label: "Home" },
   { href: "/experiences", label: "Experiences" },
   { href: "/meet-the-family", label: "Meet the Family" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
   { href: "/school-of-life", label: "School of Life" },
   { href: "/buy-sell-horses", label: "Trotalot" },
