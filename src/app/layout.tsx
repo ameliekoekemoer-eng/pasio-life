@@ -26,6 +26,10 @@ export const metadata: Metadata = {
   },
   description:
     "An adventure lifestyle brand: connect with horses, feel freedom, and live the life you dream of.",
+  icons: {
+    icon: [{ url: "/logo.png", type: "image/png" }],
+    apple: [{ url: "/logo.png", type: "image/png" }]
+  },
   alternates: {
     canonical: "/"
   },
