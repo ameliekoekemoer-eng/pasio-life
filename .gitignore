@@ -20,3 +20,5 @@ pnpm-debug.log*
 .DS_Store
 *.pem
 
+*.CR2
+*.cr2
