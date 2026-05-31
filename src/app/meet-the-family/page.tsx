@@ -2,16 +2,18 @@ import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ProfileCard from "@/components/cards/ProfileCard";
-import { publicImagePath } from "@/lib/images";
+import { publicImagePath, siteImages } from "@/lib/images";
 
 export default function MeetTheFamilyPage() {
+  const { family: img } = siteImages;
+
   const profiles = [
     {
       name: "Boas",
       title: "Steady & Kind",
       story:
         "Boas brings calm to every moment. He’s wonderful for riders who want to feel safe while they learn to trust.",
-      imageSrc: publicImagePath("Boas.jpg"),
+      imageSrc: publicImagePath(img.boas),
       highlights: ["Gentle presence", "Patient partner", "Great for beginners"]
     },
     {
@@ -19,7 +21,7 @@ export default function MeetTheFamilyPage() {
       title: "The Trail Pair",
       story:
         "Johnny and Liani love the open path. Together they teach rhythm, balance, and the joy of moving through nature.",
-      imageSrc: publicImagePath("johnney&liani.jpg"),
+      imageSrc: publicImagePath(img.johnnyLiani),
       highlights: ["Trail lovers", "Strong connection", "Freedom on earth"]
     },
     {
@@ -27,7 +29,7 @@ export default function MeetTheFamilyPage() {
       title: "The Soft Teacher",
       story:
         "Jade notices how you feel and meets you there. She’s brilliant for building confidence from the ground up.",
-      imageSrc: publicImagePath("Jade.jpg"),
+      imageSrc: publicImagePath(img.jade),
       highlights: ["Attentive", "Kind energy", "Confidence builder"]
     },
     {
@@ -35,7 +37,7 @@ export default function MeetTheFamilyPage() {
       title: "Spirit & Grace",
       story:
         "Purple has presence—beautiful, honest, and full of heart. Riding with her feels like a conversation.",
-      imageSrc: publicImagePath("Purple.jpg"),
+      imageSrc: publicImagePath(img.purple),
       highlights: ["Elegant mover", "Deep connection", "Memorable rides"]
     },
     {
@@ -43,7 +45,7 @@ export default function MeetTheFamilyPage() {
       title: "Playful Heart",
       story:
         "Lollipop brings lightness to learning. She’s perfect for riders who want fun, warmth, and a little sparkle.",
-      imageSrc: publicImagePath("Lollipop.jpg"),
+      imageSrc: publicImagePath(img.lollipop),
       highlights: ["Playful", "Affectionate", "Camp favourite"]
     },
     {
@@ -51,7 +53,7 @@ export default function MeetTheFamilyPage() {
       title: "Sunset Souls",
       story:
         "Moon and Pasha are trail magic—patient, curious, and happiest out in the open with you beside them.",
-      imageSrc: publicImagePath("moon&pasha1.jpg"),
+      imageSrc: publicImagePath(img.moonPasha),
       highlights: ["Trail specialists", "Calm explorers", "Nature lovers"]
     },
     {
@@ -59,7 +61,7 @@ export default function MeetTheFamilyPage() {
       title: "Owner & Guide",
       story:
         "Amelie created Pasio Life as a place for dreamers. She believes horses live naturally—and people should feel that same freedom.",
-      imageSrc: publicImagePath("ZoeSmile.jpg"),
+      imageSrc: publicImagePath(img.amelie),
       highlights: ["Heart-led coaching", "Welfare first", "Adventure with meaning"]
     },
     {
@@ -67,7 +69,7 @@ export default function MeetTheFamilyPage() {
       title: "The Dream Dog",
       story:
         "Buffy is the playful guardian of good energy. If you’re nervous, she finds you. If you’re happy, she celebrates louder.",
-      imageSrc: publicImagePath("Luna&Buffy.jpg"),
+      imageSrc: publicImagePath(img.buffy),
       highlights: ["Friendly welcome", "Gentle humor", "Warm company"]
     }
   ];

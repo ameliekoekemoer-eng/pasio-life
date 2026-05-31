@@ -37,7 +37,7 @@ export default function AboutPage() {
             <div className="relative overflow-hidden rounded-3xl ring-1 ring-ink-900/10">
               <Image
                 src={publicImagePath(siteImages.about)}
-                alt="Trail ride at Pasio Life"
+                alt="Connection with horses at Pasio Life"
                 width={1400}
                 height={1000}
                 className="h-full w-full object-cover"

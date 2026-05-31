@@ -13,20 +13,30 @@ export function isWebImageFilename(filename: string): boolean {
 /** Curated photos for key pages (filenames in /public/images). */
 export const siteImages = {
   hero: "Ecslipsetrailride.jpg",
-  about: "moon&pasha2.jpg",
+  about: "IMG_9338.jpg",
   buySell: "sharif&purple.jpg",
   experiences: {
     trails: "Ecslipsetrailride.jpg",
     clinics: "BiscuitNationals.jpg",
-    lessons: "horses5.jpg",
+    lessons: "IMG_9275.jpg",
     ponyCamps: "biscuit&liani.jpg",
     parties: "Luna&Buffy.jpg"
   },
   home: {
-    trails: "moon&pasha1.jpg",
-    lessons: "horses2.jpg",
-    camps: "horses3.jpg",
-    family: ["Boas.jpg", "ZoeSmile.jpg", "Luna&Buffy.jpg"] as const
+    trails: "Ecslipsetrailride.jpg",
+    lessons: "IMG_9338.jpg",
+    camps: "IMG_9320.jpg",
+    family: ["Boas.jpg", "IMG_9335.jpg", "Luna&Buffy.jpg"] as const
+  },
+  family: {
+    boas: "Boas.jpg",
+    johnnyLiani: "johnney&liani.jpg",
+    jade: "Jade.jpg",
+    purple: "IMG_9326.jpg",
+    lollipop: "IMG_9314.jpg",
+    moonPasha: "moon&pasha1.jpg",
+    amelie: "IMG_9335.jpg",
+    buffy: "Luna&Buffy.jpg"
   }
 } as const;
 
@@ -35,3 +45,16 @@ export const gallerySkipFilenames = new Set([
   "logo.png",
   "logo.svg"
 ]);
+
+/** New professional shots — surfaced first in gallery order. */
+export const galleryFeaturedFilenames = [
+  "IMG_9338.jpg",
+  "IMG_9335.jpg",
+  "IMG_9326.jpg",
+  "IMG_9275.jpg",
+  "IMG_9320.jpg",
+  "IMG_9314.jpg",
+  "IMG_9310.jpg",
+  "IMG_9263.jpg",
+  "Ecslipsetrailride.jpg"
+] as const;

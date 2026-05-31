@@ -16,7 +16,6 @@ const homeExperiences = [
     image: siteImages.home.lessons,
     href: "/booking?topic=Riding%20Lessons&experience=Lessons"
   },
-  {
     title: "Pony Camps",
     description: "Dream days where young hearts learn calm courage.",
     image: siteImages.home.camps,
