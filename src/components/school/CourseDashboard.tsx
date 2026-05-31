@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { supabase } from "@/lib/supabase/browser";
+import { getSupabaseBrowser } from "@/lib/supabase/browser";
 import type { SubscriptionStatus } from "@/lib/subscription";
 import { getSubscriptionByUserId } from "@/lib/subscription";
 import Container from "@/components/ui/Container";
@@ -103,6 +103,7 @@ export default function CourseDashboard() {
     async function load() {
       setLoading(true);
       try {
+        const supabase = getSupabaseBrowser();
         const { data } = await supabase.auth.getUser();
         const id = data.user?.id ?? null;
         if (!alive) return;
@@ -116,6 +117,10 @@ export default function CourseDashboard() {
         const s = await getSubscriptionByUserId(supabase, id);
         if (!alive) return;
         setStatus(s);
+      } catch {
+        if (!alive) return;
+        setUserId(null);
+        setStatus({ active: false });
       } finally {
         if (alive) setLoading(false);
       }
@@ -123,12 +128,17 @@ export default function CourseDashboard() {
 
     load();
 
-    const { data: sub } = supabase.auth.onAuthStateChange(() => {
-      load();
-    });
+    let authListener: { subscription: { unsubscribe: () => void } } | null = null;
+    try {
+      authListener = getSupabaseBrowser().auth.onAuthStateChange(() => {
+        load();
+      }).data;
+    } catch {
+      // Supabase not configured.
+    }
     return () => {
       alive = false;
-      sub.subscription.unsubscribe();
+      authListener?.subscription.unsubscribe();
     };
   }, []);
 

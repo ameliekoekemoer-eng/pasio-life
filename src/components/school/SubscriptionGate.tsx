@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase/browser";
+import { getSupabaseBrowser } from "@/lib/supabase/browser";
 import type { SubscriptionStatus } from "@/lib/subscription";
 import { getSubscriptionByUserId } from "@/lib/subscription";
 import { ButtonLink } from "@/components/ui/Button";
@@ -33,6 +33,7 @@ export default function SubscriptionGate({
     async function load() {
       setLoading(true);
       try {
+        const supabase = getSupabaseBrowser();
         const { data } = await supabase.auth.getUser();
         const id = data.user?.id ?? null;
         if (!alive) return;
@@ -44,6 +45,10 @@ export default function SubscriptionGate({
         const s = await getSubscriptionByUserId(supabase, id);
         if (!alive) return;
         setStatus(s);
+      } catch {
+        if (!alive) return;
+        setUserId(null);
+        setStatus({ active: false });
       } finally {
         if (alive) setLoading(false);
       }
@@ -51,12 +56,17 @@ export default function SubscriptionGate({
 
     load();
 
-    const { data: sub } = supabase.auth.onAuthStateChange(() => {
-      load();
-    });
+    let sub: { subscription: { unsubscribe: () => void } } | null = null;
+    try {
+      sub = getSupabaseBrowser().auth.onAuthStateChange(() => {
+        load();
+      }).data;
+    } catch {
+      // Supabase not configured — gate will show login state after load().
+    }
     return () => {
       alive = false;
-      sub.subscription.unsubscribe();
+      sub?.subscription.unsubscribe();
     };
   }, []);
 

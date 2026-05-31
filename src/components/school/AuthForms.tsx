@@ -3,7 +3,7 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabase/browser";
+import { getSupabaseBrowser } from "@/lib/supabase/browser";
 
 type Mode = "login" | "signup";
 
@@ -21,6 +21,7 @@ export default function AuthForms({ mode }: { mode: Mode }) {
     setError(null);
 
     try {
+      const supabase = getSupabaseBrowser();
       if (mode === "login") {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;

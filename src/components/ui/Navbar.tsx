@@ -13,7 +13,7 @@ const navItems = [
   { href: "/meet-the-family", label: "Meet the Family" },
   { href: "/about", label: "About" },
   { href: "/school-of-life", label: "School of Life" },
-  { href: "/buy-sell-horses", label: "Buy & Sell Horses" },
+  { href: "/buy-sell-horses", label: "Trotalot" },
   { href: "/contact", label: "Contact" }
 ];
 

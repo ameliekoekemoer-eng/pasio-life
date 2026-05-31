@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase/admin";
+import { getSupabaseAdmin } from "@/lib/supabase/admin";
 
 type Tier = "beginner" | "intermediate" | "advanced";
 
@@ -14,13 +14,14 @@ export async function POST(req: Request) {
     }
 
     // Requires SUPABASE_SERVICE_ROLE_KEY to be set.
-    if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
       return NextResponse.json(
-        { error: "Server env missing: SUPABASE_SERVICE_ROLE_KEY." },
+        { error: "Server env missing: Supabase is not configured." },
         { status: 500 }
       );
     }
 
+    const supabaseAdmin = getSupabaseAdmin();
     const { data: userData, error: userError } = await (supabaseAdmin.auth as any).getUser(accessToken);
     if (userError || !userData?.user) {
       return NextResponse.json(

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase/browser";
+import { getSupabaseBrowser } from "@/lib/supabase/browser";
 import { Button } from "@/components/ui/Button";
 
 type Tier = "beginner" | "intermediate" | "advanced";
@@ -15,7 +15,7 @@ export default function SubscribePanel() {
     setLoading(true);
     setMessage(null);
     try {
-      const { data } = await supabase.auth.getSession();
+      const { data } = await getSupabaseBrowser().auth.getSession();
       const accessToken = data.session?.access_token;
       if (!accessToken) {
         setMessage("Please log in to start learning.");

@@ -3,13 +3,19 @@ import Reveal from "@/components/ui/Reveal";
 import ContactForm from "@/components/forms/ContactForm";
 import { ButtonLink } from "@/components/ui/Button";
 
-export default function ContactPage({
-  searchParams
-}: {
-  searchParams?: Record<string, string | string[] | undefined>;
-}) {
-  const topicParam = searchParams?.topic;
-  const expParam = searchParams?.experience;
+type ContactSearchParams = Promise<{
+  topic?: string | string[];
+  experience?: string | string[];
+}>;
+
+type ContactPageProps = {
+  searchParams: ContactSearchParams;
+};
+
+export default async function ContactPage({ searchParams }: ContactPageProps) {
+  const params = await searchParams;
+  const topicParam = params.topic;
+  const expParam = params.experience;
 
   const topic =
     typeof topicParam === "string" ? topicParam : Array.isArray(topicParam) ? topicParam[0] : "";
