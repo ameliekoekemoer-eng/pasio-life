@@ -3,6 +3,7 @@ import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { ButtonLink } from "@/components/ui/Button";
 import Image from "next/image";
+import { publicImagePath, siteImages } from "@/lib/images";
 
 export default function BuySellHorsesPage() {
   return (
@@ -50,8 +51,8 @@ export default function BuySellHorsesPage() {
           <Reveal delayMs={160}>
             <div className="relative overflow-hidden rounded-3xl ring-1 ring-ink-900/10">
               <Image
-                src="/images/BiscuitNationals.jpg"
-                alt="Horse welfare and safety"
+                src={publicImagePath(siteImages.buySell)}
+                alt="Horses at Pasio Life"
                 width={1400}
                 height={1000}
                 className="h-full w-full object-cover"

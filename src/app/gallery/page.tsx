@@ -2,9 +2,10 @@ import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import PhotoGallery from "@/components/gallery/PhotoGallery";
-import { galleryImages } from "@/lib/gallery";
+import { getGalleryImages } from "@/lib/gallery";
 
 export default function GalleryPage() {
+  const galleryImages = getGalleryImages();
   return (
     <div className="py-14">
       <Container>
