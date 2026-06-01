@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import clsx from "clsx";
 import { formatDisplayDate } from "@/lib/booking/calendar";
+import { fetchAvailableDates } from "@/lib/booking/fetch-availability";
 import {
   EXPERIENCE_LABELS,
   experienceTypeFromParam,
@@ -60,12 +61,11 @@ export default function BookingForm() {
     const today = new Date();
     const from = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
-    fetch(`/api/availability?experience_type=${experienceType}&from=${from}`)
-      .then((r) => r.json())
-      .then((json) => {
+    fetchAvailableDates(experienceType, from)
+      .then(({ dates, error }) => {
         if (cancelled) return;
-        if (!json.dates) throw new Error(json.error ?? "Could not load dates.");
-        setAvailableDates(json.dates as AvailableDateRow[]);
+        setAvailableDates(dates);
+        setDatesError(error ?? null);
       })
       .catch((err) => {
         if (!cancelled) {
@@ -186,11 +186,16 @@ export default function BookingForm() {
             <div className="rounded-xl bg-ember-50 px-4 py-3 text-sm text-ember-900">{datesError}</div>
           ) : availableDates.length === 0 ? (
             <div className="rounded-xl bg-sand-50 px-4 py-3 text-sm text-ink-900/70 ring-1 ring-ink-900/10">
-              No dates are open for {EXPERIENCE_LABELS[experienceType].toLowerCase()}s yet. Please{" "}
+              No dates are open for {EXPERIENCE_LABELS[experienceType].toLowerCase()}s yet. Mark dates
+              in{" "}
+              <Link href="/admin" className="font-semibold text-ember-700 hover:underline">
+                Admin
+              </Link>{" "}
+              (trail rides and lessons are separate), or{" "}
               <Link href="/contact" className="font-semibold text-ember-700 hover:underline">
                 contact us
-              </Link>{" "}
-              or check back soon.
+              </Link>
+              .
             </div>
           ) : (
             <select

@@ -7,7 +7,8 @@ import {
   getCalendarDays,
   monthRange
 } from "@/lib/booking/calendar";
-import { EXPERIENCE_LABELS, type AvailableDateRow, type ExperienceType } from "@/lib/booking/types";
+import { fetchAvailableDates } from "@/lib/booking/fetch-availability";
+import { EXPERIENCE_LABELS, type ExperienceType } from "@/lib/booking/types";
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -31,12 +32,24 @@ export default function AdminCalendar() {
         `/api/admin/availability?experience_type=${experienceType}&from=${from}&to=${to}`
       );
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error ?? "Failed to load dates.");
 
-      const keys = new Set(
-        (json.dates as AvailableDateRow[]).map((row) => row.available_date)
-      );
+      if (res.ok) {
+        const keys = new Set(
+          (json.dates as { available_date: string }[]).map((row) => row.available_date)
+        );
+        setAvailable(keys);
+        return;
+      }
+
+      const fallback = await fetchAvailableDates(experienceType, from);
+      if (fallback.error && fallback.dates.length === 0) {
+        throw new Error(json.error ?? fallback.error);
+      }
+      const keys = new Set(fallback.dates.map((row) => row.available_date));
       setAvailable(keys);
+      if (fallback.error) {
+        setError(`Showing dates from backup read. ${fallback.error}`);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load.");
     } finally {

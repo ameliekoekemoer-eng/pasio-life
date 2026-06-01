@@ -22,7 +22,10 @@ export async function sendBookingNotificationEmail(
     return { sent: false, reason: "EmailJS not configured (saved to database only)." };
   }
 
-  const ownerEmail = process.env.BOOKING_NOTIFY_EMAIL?.trim() || process.env.PASIO_EMAIL?.trim();
+  const ownerEmail =
+    process.env.BOOKING_NOTIFY_EMAIL?.trim() ||
+    process.env.NEXT_PUBLIC_PASIO_EMAIL?.trim() ||
+    "amelie.koekemoer@gmail.com";
   const experienceLabel = EXPERIENCE_LABELS[payload.experienceType];
 
   const templateParams: Record<string, string> = {

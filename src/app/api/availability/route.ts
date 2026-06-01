@@ -1,6 +1,14 @@
 import { NextResponse } from "next/server";
-import { getSupabaseAdmin } from "@/lib/supabase/admin";
+import { getSupabaseForRead } from "@/lib/supabase/server";
 import type { ExperienceType } from "@/lib/booking/types";
+import type { PostgrestError } from "@supabase/supabase-js";
+
+function friendlyDbError(error: PostgrestError): string {
+  if (error.code === "42P01" || error.message.includes("available_dates")) {
+    return "Database table missing. Run supabase/booking-schema.sql in your Supabase SQL Editor.";
+  }
+  return error.message;
+}
 
 export async function GET(req: Request) {
   try {
@@ -13,7 +21,7 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: "Invalid experience_type." }, { status: 400 });
     }
 
-    let query = getSupabaseAdmin()
+    let query = getSupabaseForRead()
       .from("available_dates")
       .select("id, available_date, experience_type, created_at")
       .order("available_date", { ascending: true });
@@ -31,14 +39,16 @@ export async function GET(req: Request) {
     const { data, error } = await query;
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      return NextResponse.json({ error: friendlyDbError(error) }, { status: 500 });
     }
 
     return NextResponse.json({ dates: data ?? [] });
   } catch (err) {
-    return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Unknown error." },
-      { status: 500 }
-    );
+    const message = err instanceof Error ? err.message : "Unknown error.";
+    const hint =
+      message.includes("not configured") || message.includes("Supabase")
+        ? " Check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local."
+        : "";
+    return NextResponse.json({ error: message + hint }, { status: 500 });
   }
 }

@@ -1,4 +1,5 @@
 -- Run in Supabase SQL Editor (Dashboard → SQL → New query)
+-- Required for /admin calendar and /booking available dates.
 
 create table if not exists public.available_dates (
   id uuid primary key default gen_random_uuid(),
@@ -36,8 +37,6 @@ create policy "Public read available dates"
   to anon, authenticated
   using (true);
 
-drop policy if exists "No direct public writes to availability" on public.available_dates;
--- Writes go through API using service role only.
-
-drop policy if exists "No direct public booking inserts" on public.booking_requests;
--- Inserts go through API using service role only.
+-- Inserts/updates/deletes use the service role via API routes (not anon).
+grant select on public.available_dates to anon, authenticated;
+grant usage on schema public to anon, authenticated;
