@@ -8,19 +8,20 @@ const homeExperiences = [
     title: "Horse Riding Trails",
     description: "Ride through nature at your own rhythm.",
     image: siteImages.home.trails,
-    href: "/experiences"
+    href: "/experiences",
   },
   {
     title: "Riding Lessons",
     description: "Build connection first—then skills that last.",
     image: siteImages.home.lessons,
-    href: "/booking?topic=Riding%20Lessons&experience=Lessons"
+    href: "/booking?topic=Riding%20Lessons&experience=Lessons",
   },
+  {
     title: "Pony Camps",
     description: "Dream days where young hearts learn calm courage.",
     image: siteImages.home.camps,
-    href: "/booking?topic=Pony%20Camps&experience=Pony%20Camp"
-  }
+    href: "/booking?topic=Pony%20Camps&experience=Pony%20Camp",
+  },
 ] as const;
 
 export default function Home() {
@@ -42,7 +43,11 @@ export default function Home() {
             Welcome to Pasio Life — where you don’t just ride horses, you experience a lifestyle, a
             connection, and a dream.
           </p>
-          <ButtonLink href="/booking" variant="primary" className="!bg-black !text-white hover:!bg-[#C8A2C8] hover:!text-black">
+          <ButtonLink
+            href="/booking"
+            variant="primary"
+            className="!bg-black !text-white hover:!bg-[#C8A2C8] hover:!text-black"
+          >
             Book Your Experience
           </ButtonLink>
         </div>
@@ -83,7 +88,9 @@ export default function Home() {
               <div className="p-6">
                 <h3 className="mb-3 text-xl font-semibold">{item.title}</h3>
                 <p className="mb-4">{item.description}</p>
-                <span className="font-semibold text-[#C8A2C8] group-hover:underline">Book Now →</span>
+                <span className="font-semibold text-[#C8A2C8] group-hover:underline">
+                  Book Now →
+                </span>
               </div>
             </Link>
           ))}
@@ -96,7 +103,7 @@ export default function Home() {
           {[
             { label: "Our Horses", image: siteImages.home.family[0], href: "/meet-the-family" },
             { label: "Your Guide", image: siteImages.home.family[1], href: "/meet-the-family" },
-            { label: "Buffy the Dog", image: siteImages.home.family[2], href: "/meet-the-family" }
+            { label: "Buffy the Dog", image: siteImages.home.family[2], href: "/meet-the-family" },
           ].map((item) => (
             <Link
               key={item.label}
