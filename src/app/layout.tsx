@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Inter, Playfair_Display } from "next/font/google";
+import AvailabilityBanner from "@/components/ui/AvailabilityBanner";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 
@@ -59,7 +60,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Skip to content
         </a>
-        <Navbar />
+        <div className="sticky top-0 z-[90]">
+          <AvailabilityBanner />
+          <Navbar />
+        </div>
         <main id="main">{children}</main>
         <Footer />
       </body>

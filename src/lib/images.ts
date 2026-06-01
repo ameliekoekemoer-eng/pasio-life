@@ -46,15 +46,15 @@ export const gallerySkipFilenames = new Set([
   "logo.svg"
 ]);
 
-/** New professional shots — surfaced first in gallery order. */
+/** New professional shots — surfaced first in gallery order (matched case-insensitively). */
 export const galleryFeaturedFilenames = [
-  "IMG_9338.jpg",
-  "IMG_9335.jpg",
-  "IMG_9326.jpg",
-  "IMG_9275.jpg",
-  "IMG_9320.jpg",
-  "IMG_9314.jpg",
-  "IMG_9310.jpg",
-  "IMG_9263.jpg",
-  "Ecslipsetrailride.jpg"
+  "Ecslipse on a trail ride.jpg",
+  "Amelie, Sue-Mari, Liani & Buffy.jpg",
+  "Sharif & Purple.jpg",
+  "Eclipse.jpg",
+  "Biscuit at Nationals.jpg",
+  "Luna & Buffy.jpg",
+  "Moon & Pasha1.jpg",
+  "Roemo & Bronwin.jpg",
+  "Zoe Smiling.jpg"
 ] as const;
