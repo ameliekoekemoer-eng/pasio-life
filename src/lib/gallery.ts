@@ -36,12 +36,14 @@ const FAMILY_KEYWORDS = [
   "johnny",
   "johnney",
   "zoe & buffy",
+  "buffy & johnny",
   "helmets"
 ];
 
 const HORSE_KEYWORDS = [
   "eclipse",
   "eclispe",
+  "ecslipse",
   "roemo",
   "romeo",
   "sharif",
@@ -59,7 +61,8 @@ const HORSE_KEYWORDS = [
   "jackie",
   "zoe",
   "bubbles",
-  "liani"
+  "liani",
+  "johnney"
 ];
 
 const EXPERIENCE_KEYWORDS = [
