@@ -39,7 +39,7 @@ export default function Navbar() {
   return (
     <header
       className={clsx(
-        "sticky top-0 z-[80] w-full border-b transition",
+        "w-full border-b transition",
         scrolled
           ? "border-black/10 bg-[#C8A2C8]/75 backdrop-blur-md" // lilac with transparency
           : "border-transparent bg-[#C8A2C8]" // solid lilac when not scrolled

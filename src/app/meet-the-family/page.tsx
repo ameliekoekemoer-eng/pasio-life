@@ -17,10 +17,10 @@ export default function MeetTheFamilyPage() {
       highlights: ["Gentle presence", "Patient partner", "Great for beginners"]
     },
     {
-      name: "Johnny & Liani",
+      name: "Johnney & Liani",
       title: "The Trail Pair",
       story:
-        "Johnny and Liani love the open path. Together they teach rhythm, balance, and the joy of moving through nature.",
+        "Johnney and Liani love the open path. Together they teach rhythm, balance, and the joy of moving through nature.",
       imageSrc: publicImagePath(img.johnnyLiani),
       highlights: ["Trail lovers", "Strong connection", "Freedom on earth"]
     },
