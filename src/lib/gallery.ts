@@ -36,7 +36,7 @@ export function getGalleryImages(): GalleryImage[] {
         !gallerySkipFilenames.has(filename.toLowerCase())
     )
     .sort((a, b) => {
-      const featuredOrder = new Map(
+      const featuredOrder = new Map<string, number>(
         galleryFeaturedFilenames.map((name, index) => [name, index])
       );
       const aFeatured = featuredOrder.get(a);
