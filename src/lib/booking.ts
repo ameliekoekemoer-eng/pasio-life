@@ -25,6 +25,9 @@ export const EXPERIENCE_TYPES: ExperienceType[] = [
   { slug: "formal_picnic", label: "Formal Picnic", durationMinutes: 60 },
   { slug: "thirty_min_lesson", label: "30 min Lesson", durationMinutes: 30 },
   { slug: "one_hour_lesson", label: "1 hour Lesson", durationMinutes: 60 },
+  // Legacy slug kept for backward compatibility with existing `available_dates`
+  // / `booking_requests` rows created before the price-list types existed.
+  { slug: "trail_ride", label: "Trail Ride", durationMinutes: 60 },
 ];
 
 const EXPERIENCE_BY_SLUG = new Map(EXPERIENCE_TYPES.map((e) => [e.slug, e]));
