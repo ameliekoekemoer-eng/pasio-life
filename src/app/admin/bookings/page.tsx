@@ -1,4 +1,7 @@
+import Link from "next/link";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
+import { isAdminAuthenticated } from "@/lib/booking/admin-auth";
+import AdminTabs from "@/components/admin/AdminTabs";
 import {
   formatTimeLabel,
   getExperienceType,
@@ -33,9 +36,13 @@ function Unauthorized() {
     <div className="mx-auto max-w-2xl text-center">
       <h1 className="mb-3 text-2xl font-bold">Admin bookings</h1>
       <p className="text-sm text-black/70">
-        This page is protected. Set the <code>BOOKING_ADMIN_TOKEN</code>{" "}
-        environment variable and open{" "}
-        <code>/admin/bookings?token=YOUR_TOKEN</code>.
+        This page is protected.{" "}
+        <Link href="/admin" className="underline">
+          Sign in on the admin page
+        </Link>{" "}
+        to view bookings, or open{" "}
+        <code>/admin/bookings?token=YOUR_TOKEN</code> with the{" "}
+        <code>BOOKING_ADMIN_TOKEN</code> environment variable set.
       </p>
     </div>
   );
@@ -48,8 +55,10 @@ export default async function AdminBookingsPage({
 }) {
   const expectedToken = process.env.BOOKING_ADMIN_TOKEN;
   const { token } = await searchParams;
+  const tokenOk = Boolean(expectedToken) && token === expectedToken;
+  const sessionOk = await isAdminAuthenticated();
 
-  if (!expectedToken || token !== expectedToken) {
+  if (!tokenOk && !sessionOk) {
     return (
       <main className="min-h-screen bg-white px-6 py-12 text-black">
         <Unauthorized />
@@ -112,10 +121,17 @@ export default async function AdminBookingsPage({
   return (
     <main className="min-h-screen bg-white px-6 py-12 text-black">
       <div className="mx-auto max-w-4xl">
+        <div className="mb-6">
+          <AdminTabs active="bookings" />
+        </div>
         <h1 className="mb-2 text-3xl font-bold">Admin bookings</h1>
         <p className="mb-8 text-sm text-black/60">
-          Upcoming available dates and the time slots booked on each. Date-level
-          availability is managed in your existing admin tool.
+          Upcoming available dates and the time slots booked on each. Mark which
+          dates are available on the{" "}
+          <Link href="/admin" className="underline">
+            availability calendar
+          </Link>
+          .
         </p>
 
         {days.length === 0 ? (
