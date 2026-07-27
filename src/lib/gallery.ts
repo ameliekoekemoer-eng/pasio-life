@@ -3,6 +3,7 @@ import path from "node:path";
 import {
   galleryFeaturedFilenames,
   gallerySkipFilenames,
+  isWebImageFilename,
   publicImagePath
 } from "@/lib/images";
 
@@ -14,11 +15,6 @@ export type GalleryImage = {
   filename: string;
   categories: GalleryCategory[];
 };
-
-function isJpgFilename(filename: string): boolean {
-  const lower = filename.toLowerCase();
-  return lower.endsWith(".jpg") || lower.endsWith(".jpeg");
-}
 
 function labelFromFilename(filename: string): string {
   return filename
@@ -107,7 +103,7 @@ export function getGalleryImages(): GalleryImage[] {
     .readdirSync(imagesDir)
     .filter(
       (filename) =>
-        isJpgFilename(filename) &&
+        isWebImageFilename(filename) &&
         !gallerySkipFilenames.has(filename.toLowerCase())
     )
     .sort((a, b) => {

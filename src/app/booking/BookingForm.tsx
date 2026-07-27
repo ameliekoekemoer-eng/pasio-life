@@ -8,6 +8,7 @@ import { formatDisplayDate } from "@/lib/booking/calendar";
 import { fetchAvailableDates } from "@/lib/booking/fetch-availability";
 import {
   EXPERIENCE_LABELS,
+  enquiryTopicFromParams,
   experienceTypeFromParam,
   type AvailableDateRow,
   type ExperienceType
@@ -23,6 +24,11 @@ export default function BookingForm() {
   const searchParams = useSearchParams();
   const topicFromUrl = searchParams.get("topic") ?? "";
   const experienceFromUrl = searchParams.get("experience") ?? "";
+
+  const enquiryTopic = useMemo(
+    () => enquiryTopicFromParams(topicFromUrl, experienceFromUrl),
+    [topicFromUrl, experienceFromUrl]
+  );
 
   const initialType = useMemo(() => {
     const fromTopic = experienceTypeFromParam(topicFromUrl);
@@ -100,7 +106,9 @@ export default function BookingForm() {
           party_size: partySize,
           experience_type: experienceType,
           chosen_date: chosenDate,
-          notes
+          notes: [topicFromUrl && `Interest: ${topicFromUrl}`, notes.trim()]
+            .filter(Boolean)
+            .join("\n\n") || undefined
         })
       });
 
